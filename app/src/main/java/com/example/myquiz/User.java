@@ -3,6 +3,7 @@ package com.example.myquiz;
 public class User {
 
     private String name, email, password, refCode;
+    private long coins=20;
 
     public User(String name, String email, String password, String refCode) {
         this.name = name;
@@ -44,5 +45,13 @@ public class User {
 
     public void setRefCode(String refCode) {
         this.refCode = refCode;
+    }
+
+    public long getCoins() {
+        return coins;
+    }
+
+    public void setCoins(long coins) {
+        this.coins = coins;
     }
 }

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item android:title="Wallet"
-    android:icon="@drawable/wallet"
+    android:icon="@drawable/wallet_white"
 
     android:id="@+id/wallet"
     app:showAsAction="always"/>
