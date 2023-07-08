@@ -42,43 +42,55 @@ public class SignupActivity extends AppCompatActivity {
         binding.createNewbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password, name , refCode;
+                String email, password, name;
                 email = binding.emailbox.getText().toString();
                 password = binding.passwordBox.getText().toString();
-                name= binding.nameBox.getText().toString();
-                refCode= binding.referbox.getText().toString();
+                name = binding.nameBox.getText().toString();
 
-              final   User user = new User(name,email,password,refCode);
-              dialog.show();
-                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
+                    Toast.makeText(SignupActivity.this, "Please enter your details completely", Toast.LENGTH_SHORT).show();
+                } else {
+
+
+                final User user = new User(name, email, password);
+                dialog.show();
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             String uid = task.getResult().getUser().getUid();
                             database
                                     .collection("users")
                                     .document(uid)
                                     .set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        dialog.dismiss();
-                                        startActivity(new Intent(SignupActivity.this,MainActivity.class));
-                                        finish();
-                                    }else {
-                                        Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                dialog.dismiss();
+                                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                                finish();
+                                            } else {
+                                                Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-                                    }
-                                }
-                            });
+                                            }
+                                        }
+                                    });
                             Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             dialog.dismiss();
                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            }
+            }
+        });
+
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignupActivity.this,LoginActivity.class));
             }
         });
     }

@@ -88,4 +88,21 @@
         app:layout_constraintStart_toStartOf="@+id/passBox"
         app:layout_constraintTop_toBottomOf="@+id/passBox" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginRight="110dp"
+
+        android:backgroundTint="@color/lightGray"
+
+        android:text="Log Out"
+        android:textColor="@color/BLUE"
+        app:layout_constraintEnd_toEndOf="@+id/passBox"
+        app:layout_constraintHorizontal_bias="0.344"
+        app:layout_constraintStart_toStartOf="@+id/updateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/updateBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
