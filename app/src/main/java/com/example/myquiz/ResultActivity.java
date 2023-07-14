@@ -2,7 +2,9 @@ package com.example.myquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.myquiz.databinding.ActivityResultBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +24,12 @@ int POINTS=10;
         int totalQuestions= getIntent().getIntExtra("total",0);
 
         long points = correctAnswers*POINTS;
-
+        binding.restartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ResultActivity.this,HomeFragment.class));
+            }
+        });
         binding.score.setText(String.format("%d/%d",correctAnswers,totalQuestions));
         binding.earnedCoins.setText(String.valueOf(points));
         FirebaseFirestore database = FirebaseFirestore.getInstance();

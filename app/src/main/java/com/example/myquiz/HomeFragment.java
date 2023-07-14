@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         user =documentSnapshot.toObject(User.class);
-                        binding.userName.setText("Hi," + user.getName());
+                        binding.userName.setText("Hi,\t" + user.getName());
                     }
                 });
         ArrayList<CategoryModel> categories = new ArrayList<>();

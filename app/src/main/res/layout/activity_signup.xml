@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/card_bg"
     tools:context=".SignupActivity">
 
 
-    <ImageView
+    <View
         android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+
+        android:background="@drawable/top_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,10 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="40dp"
         app:cardCornerRadius="20dp"
+        android:backgroundTint="@color/bg_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +68,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
-                android:background="@drawable/textbox"
+                android:background="@drawable/option_unselected"
                 android:hint="Name"
                 android:inputType="textPersonName"
                 android:padding="15dp" />
@@ -77,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/textbox"
+                android:background="@drawable/option_unselected"
                 android:ems="10"
 
                 android:hint="Email Address"
@@ -89,9 +90,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/textbox"
+                android:background="@drawable/option_unselected"
                 android:ems="10"
                 android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/confirmpasswordBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/option_unselected"
+                android:ems="10"
+                android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:padding="15dp" />
 
@@ -120,7 +132,7 @@
 
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/coinsP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

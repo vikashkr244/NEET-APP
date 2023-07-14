@@ -5,22 +5,35 @@
     <color name="purple_700">#FF3500B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-
-    <color name="colorPurple">#9C27B0</color>
+    <color name="colorPrimary">#5f6fea</color>
+    <color name="colorPurple">#5f6fea</color>
     <color name="BLUE">#3F51B5</color>
     <color name="darkOrange">#9C2E0B</color>
-    <color name="Orange">#EC7955</color>
+    <color name="Orange">#FFA41D</color>
 
- <color name="darkGreen">#0B730F</color>
-    <color name="Green">#8CEA90</color>
+    <color name="darkRed">#9C2E0B</color>
+    <color name="red">#FFABA5</color>
+ <color name="darkGreen">#185c1b</color>
+    <color name="Green">#A7F6AB</color>
 
 
     <color name="shadow">#292B35</color>
 <color name="lightGray">#e8e8e8</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
     <color name="primarycolor">#015055</color>
     <color name="primarycolor2">#e1f396</color>
     <color name="secondarycolor">#edf8c0</color>
+
+
+    <color name="bg_color">#eff0fc</color>
+    <color name="bg_dark1">#5f6fea</color>
+    <color name="bg_dark2">#7785f0</color>
+    <color name="card_bg">#ced2ff</color>
+    <color name="txt_color1">#7a89f0</color>
+    <color name="txt_color2">#535691</color>
+
 
 </resources>

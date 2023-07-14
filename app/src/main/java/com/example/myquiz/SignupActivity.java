@@ -42,13 +42,18 @@ public class SignupActivity extends AppCompatActivity {
         binding.createNewbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password, name;
+                String email, password, name, cpassword;
                 email = binding.emailbox.getText().toString();
                 password = binding.passwordBox.getText().toString();
+                cpassword= binding.confirmpasswordBox.getText().toString();
                 name = binding.nameBox.getText().toString();
 
-                if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
+
+                if (email.isEmpty() || password.isEmpty() || name.isEmpty()|| cpassword.isEmpty()) {
                     Toast.makeText(SignupActivity.this, "Please enter your details completely", Toast.LENGTH_SHORT).show();
+                } else if (!cpassword.equals(password)) {
+                    Toast.makeText(SignupActivity.this, "Please confirm your password correctly", Toast.LENGTH_SHORT).show();
+
                 } else {
 
 

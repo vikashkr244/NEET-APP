@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/bg_color"
 
     tools:context=".MainActivity">
 
@@ -12,9 +12,8 @@
     <View
         android:id="@+id/view2"
         android:layout_width="wrap_content"
-        android:layout_height="140dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/background"
+        android:layout_height="170dp"
+             android:background="@drawable/top_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,10 +23,10 @@
         android:id="@+id/categoryList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background"
+       android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+
+        android:background="@color/bg_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,31 +36,41 @@
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/aladin"
-        android:text="Hi, Osama"
-        android:textColor="@color/white"
+        android:text="Hi,"
+        android:textColor="@color/txt_color2"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/letsPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
         android:fontFamily="@font/aladin"
         android:text="Lets Play"
-        android:textColor="@color/Orange"
+        android:textColor="@color/txt_color2"
         android:textSize="24sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <ImageView
+        android:id="@+id/userImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="36dp"
+        android:padding="8dp"
+        android:background="@drawable/profile_bg"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13"
+        app:srcCompat="@drawable/user" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

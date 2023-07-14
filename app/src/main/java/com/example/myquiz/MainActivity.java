@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle(""); // Set an empty string as the title
-//        binding.totalCoins.setText("123");
-  retrieveCoinsFromFirebase();
+//        setSupportActionBar(binding.toolbar);
+//        getSupportActionBar().setTitle(""); // Set an empty string as the title
+////        binding.totalCoins.setText("123");
+//  retrieveCoinsFromFirebase();
        replaceFrag(new HomeFragment());
 
 
@@ -80,11 +80,7 @@ binding.bottomBar.setOnItemSelectedListener(item -> {
         fragmentTransaction.commit();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.home_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -94,21 +90,21 @@ binding.bottomBar.setOnItemSelectedListener(item -> {
         return super.onOptionsItemSelected(item);
     }
 
-    private void retrieveCoinsFromFirebase() {
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-        database.collection("users")
-                .document(FirebaseAuth.getInstance().getUid())
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
-                        if (user != null) {
-                            long coins = user.getCoins();
-                            //totalCoins = binding.totalCoinsTextView;
-                           binding.totalCoins.setText(String.valueOf(coins));
-                        }
-                    }
-                });
-    }
+//    public void retrieveCoinsFromFirebase() {
+//        FirebaseFirestore database = FirebaseFirestore.getInstance();
+//
+//        database.collection("users")
+//                .document(FirebaseAuth.getInstance().getUid())
+//                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        User user = documentSnapshot.toObject(User.class);
+//                        if (user != null) {
+//                            long coins = user.getCoins();
+//                            //totalCoins = binding.totalCoinsTextView;
+//                           binding.totalCoins.setText(String.valueOf(coins));
+//                        }
+//                    }
+//                });
+//    }
 }
