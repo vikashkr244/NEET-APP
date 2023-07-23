@@ -3,6 +3,7 @@ package com.example.myquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -29,12 +30,20 @@ int index =0;
     CountDownTimer timer;
     FirebaseFirestore database;
     int correctAnswers=0;
+    MediaPlayer correctSound;
+    MediaPlayer wrongSound;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        correctSound = MediaPlayer.create(this, R.raw.winsound);
+        wrongSound = MediaPlayer.create(this, R.raw.errorsound);
+
 
         questions = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
@@ -130,13 +139,16 @@ int index =0;
             String selectedAnswer = textView.getText().toString();
             if (selectedAnswer.equals(question.getAns())) {
                 correctAnswers++;
+                correctSound.start();
+
                 Toast.makeText(this, "CORRECT!!", Toast.LENGTH_SHORT).show();
                 textView.setBackground(getResources().getDrawable(R.drawable.option_right));
 
 
             } else {
                 showAnswer();
-                Toast.makeText(this, "WRONG!!!", Toast.LENGTH_SHORT).show();
+                wrongSound.start();
+
                 textView.setBackground(getResources().getDrawable(R.drawable.option_wrong));
             }
         }
@@ -174,4 +186,18 @@ int index =0;
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (correctSound != null) {
+            correctSound.release();
+            correctSound = null;
+        }
+        if (wrongSound != null) {
+            wrongSound.release();
+            wrongSound = null;
+        }
+    }
+
 }

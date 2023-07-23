@@ -1,11 +1,14 @@
 package com.example.myquiz;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -40,7 +43,8 @@ public class ProfileFragment extends Fragment {
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
+
+                showLogoutConfirmationDialog();
             }
         });
     }
@@ -96,6 +100,26 @@ public class ProfileFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void showLogoutConfirmationDialog() {
+        // Use the parent activity's context to create the AlertDialog
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to log out?");
+            builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Call the logout() method when the user confirms logout
+                    logout();
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            // Show the dialog
+            builder.show();
+        }
     }
     private void logout() {
         // Implement your logout logic here

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.View;
@@ -32,7 +33,7 @@ public class SignupActivity extends AppCompatActivity {
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
-
+        binding.getRoot().setSaveEnabled(true);
         auth = FirebaseAuth.getInstance();
         database = FirebaseFirestore.getInstance();
 
@@ -55,9 +56,13 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "Please confirm your password correctly", Toast.LENGTH_SHORT).show();
 
                 } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        binding.emailbox.setAutofillHints(View.AUTOFILL_HINT_EMAIL_ADDRESS);
+                        binding.passwordBox.setAutofillHints(View.AUTOFILL_HINT_PASSWORD);
 
+                    }
 
-                final User user = new User(name, email, password);
+                    final User user = new User(name, email, password);
                 dialog.show();
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
