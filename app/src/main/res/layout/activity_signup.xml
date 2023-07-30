@@ -23,10 +23,11 @@
 
             <View
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_width="200dp"
+                android:layout_height="190dp"
 
-                android:background="@drawable/top_background"
+                android:background="@drawable/signupicon"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,10 +35,11 @@
 
             <androidx.cardview.widget.CardView
 
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="22dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="40dp"
                 android:backgroundTint="@color/bg_color"
@@ -91,12 +93,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:autofillHints="emailAddress"
                         android:background="@drawable/option_unselected"
                         android:ems="10"
-                        android:autofillHints="emailAddress"
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
-                        android:importantForAutofill="yes"
                         android:padding="15dp" />
 
                     <EditText
@@ -104,12 +105,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:autofillHints="password"
                         android:background="@drawable/option_unselected"
                         android:ems="10"
                         android:hint="Password"
-                        android:autofillHints="password"
+
                         android:inputType="textPassword"
-                        android:importantForAutofill="yes"
                         android:padding="15dp" />
 
                     <EditText
@@ -142,20 +143,12 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/submit_btn"
 
                         android:text="Already Have an Account" />
 
 
-                    <TextView
-                        android:id="@+id/coinsP"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center"
-                        android:text="By signing up you agree to our privacy policy and terms and conditions."
-                        android:textSize="10sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
