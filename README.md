@@ -19,4 +19,4 @@ The Quiz App is an engaging Android application that provides users with interac
 - 
 ## Screenshots
 
-![Login Screen](https://github.com/Osamaz123/Quiz-App/blob/master/screenshots/IMG_20230730_181004.jpg)
+![Login Screen](https://github.com/Osamaz123/Quiz-App/blob/master/ss.png)
