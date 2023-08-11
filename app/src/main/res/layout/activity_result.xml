@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".ResultActivity">
 
     <ImageView
@@ -24,7 +25,8 @@
         android:layout_marginTop="16dp"
 
         android:text="Congratulations!"
-        android:textColor="@android:color/black"
+        android:textColor="@color/Orange"
+        android:textStyle="bold"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
@@ -37,7 +39,7 @@
         android:layout_marginTop="16dp"
 
         android:text="YOUR SCORE"
-        android:textColor="@android:color/black"
+        android:textColor="@color/txt_color2"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -49,7 +51,7 @@
         android:layout_height="wrap_content"
 
         android:text="8/10"
-        android:textColor="@android:color/black"
+        android:textColor="@color/txt_color2"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/textView8"
@@ -60,9 +62,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
 
         android:text="EARNED COINS"
-        android:textColor="@android:color/black"
+        android:textColor="@color/txt_color2"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/score"
         app:layout_constraintStart_toStartOf="@+id/score"
@@ -72,15 +75,15 @@
         android:id="@+id/earnedCoins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_coins"
-        android:drawablePadding="10dp"
 
+
+        android:layout_marginStart="9dp"
         android:text="500"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/Orange"
         android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <Button
@@ -112,11 +115,21 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:background="@drawable/submit_btn"
+        android:background="@drawable/button_3"
         android:text="Restart"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/shareBtn"
         app:layout_constraintTop_toBottomOf="@+id/earnedCoins" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/earnedCoins"
+        app:layout_constraintEnd_toStartOf="@+id/earnedCoins"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:srcCompat="@drawable/coins" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,10 @@ public class WalletFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                  user =documentSnapshot.toObject(User.class);
-                binding.currentCoins.setText(String.valueOf(user.getCoins()));
+                 String currentCoins= String.valueOf(user.getCoins());
+                binding.currentCoins.setText(currentCoins);
+                long requiredCoins= 50000- user.getCoins();
+                binding.requiredCoins.setText(String.valueOf(requiredCoins)+"\tcoins required to withdraw");
             }
         });
 

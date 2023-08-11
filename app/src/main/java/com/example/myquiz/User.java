@@ -2,14 +2,14 @@ package com.example.myquiz;
 
 public class User {
 
-    private String name, email, password, refCode;
+    private String name, email, password;
     private long coins=20;
 
-    public User(String name, String email, String password, String refCode) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.refCode = refCode;
+
     }
 
     public User() {
@@ -39,13 +39,8 @@ public class User {
         this.password = password;
     }
 
-    public String getRefCode() {
-        return refCode;
-    }
 
-    public void setRefCode(String refCode) {
-        this.refCode = refCode;
-    }
+
 
     public long getCoins() {
         return coins;

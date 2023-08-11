@@ -3,6 +3,7 @@ package com.example.myquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -16,7 +17,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class QuizActivity extends AppCompatActivity {
 ActivityQuizBinding binding;
@@ -26,59 +30,64 @@ int index =0;
     CountDownTimer timer;
     FirebaseFirestore database;
     int correctAnswers=0;
+    MediaPlayer correctSound;
+    MediaPlayer wrongSound;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityQuizBinding.inflate(getLayoutInflater());
+        binding = ActivityQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        correctSound = MediaPlayer.create(this, R.raw.winsound);
+        wrongSound = MediaPlayer.create(this, R.raw.errorsound);
+
+
         questions = new ArrayList<>();
-        database =FirebaseFirestore.getInstance();
+        database = FirebaseFirestore.getInstance();
         String catId = getIntent().getStringExtra("catId");
-        Random random = new Random();
-        int rand = random.nextInt(12);
+
         database.collection("categories")
                 .document(catId)
                 .collection("questions")
-                .whereGreaterThanOrEqualTo("index",rand)
-                .orderBy("index")
-                .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots.getDocuments().size()<5){
-                    database.collection("categories")
-                            .document(catId)
-                            .collection("questions")
-                            .whereLessThanOrEqualTo("index",rand)
-                            .orderBy("index")
-                            .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
+                        int totalQuestions = documents.size();
 
-                                for (DocumentSnapshot snapshot: queryDocumentSnapshots){
-                                    Questions question = snapshot.toObject(Questions.class);
+                        if (totalQuestions <= 10) {
+                            // Load all available questions if there are less than or equal to 10
+                            for (DocumentSnapshot snapshot : documents) {
+                                Questions question = snapshot.toObject(Questions.class);
+                                questions.add(question);
+                            }
+                        } else {
+                            // Randomly select 10 questions from the collection
+                            Random random = new Random();
+                            Set<Integer> selectedIndexes = new HashSet<>();
+
+                            while (selectedIndexes.size() < 10) {
+                                int randomIndex = random.nextInt(totalQuestions);
+                                if (!selectedIndexes.contains(randomIndex)) {
+                                    selectedIndexes.add(randomIndex);
+                                    Questions question = documents.get(randomIndex).toObject(Questions.class);
                                     questions.add(question);
                                 }
-                            setNextQuestion();
-
+                            }
                         }
-                    });
-                }else{
-                    for (DocumentSnapshot snapshot: queryDocumentSnapshots){
-                        Questions question = snapshot.toObject(Questions.class);
-                        questions.add(question);
+
+                        setNextQuestion();
                     }
-                    setNextQuestion();
-                }
-            }
-        });
 
+                });
 
-
-           restTimer();
-
-
+        restTimer();
     }
+    private boolean optionSelected = false;
 
     void restTimer(){
         timer = new CountDownTimer(30000,1000) {
@@ -89,7 +98,7 @@ int index =0;
 
             @Override
             public void onFinish() {
-
+                setNextQuestion();
             }
         };
     }
@@ -99,38 +108,49 @@ int index =0;
             binding.option1.setBackground(getResources().getDrawable(R.drawable.option_right));
         else if(question.getAns().equals(binding.option2.getText().toString()))
             binding.option2.setBackground(getResources().getDrawable(R.drawable.option_right));
-else if(question.getAns().equals(binding.option3.getText().toString()))
+        else if(question.getAns().equals(binding.option3.getText().toString()))
             binding.option3.setBackground(getResources().getDrawable(R.drawable.option_right));
-else if(question.getAns().equals(binding.option4.getText().toString()))
+        else if(question.getAns().equals(binding.option4.getText().toString()))
             binding.option4.setBackground(getResources().getDrawable(R.drawable.option_right));
 
     }
     void setNextQuestion(){
+        optionSelected=false;
         if(timer!= null)
             timer.cancel();
+
         restTimer();
         timer.start();
         if(index<questions.size()){
             binding.questionCounter.setText(String.format("%d/%d",(index+1),questions.size()));
-             question =questions.get(index);
+            question =questions.get(index);
             binding.question.setText(question.getQuestion());
             binding.option1.setText(question.getOpt1());
             binding.option2.setText(question.getOpt2());
             binding.option3.setText(question.getOpt3());
             binding.option4.setText(question.getOpt4());
-
+              index++;
         }
     }
+
     void  checkAnswer(TextView textView){
-        String selectedAnswer = textView.getText().toString();
-        if(selectedAnswer.equals(question.getAns())){
-            correctAnswers++;
-            Toast.makeText(this, "CORRECT!!", Toast.LENGTH_SHORT).show();
-            textView.setBackground(getResources().getDrawable(R.drawable.option_right));
-        }else{
-            showAnswer();
-            Toast.makeText(this, "WRONG!!!", Toast.LENGTH_SHORT).show();
-            textView.setBackground(getResources().getDrawable(R.drawable.option_wrong));
+        if (!optionSelected) {
+            optionSelected = true; // Set the flag to true to indicate an option has been selected
+            String selectedAnswer = textView.getText().toString();
+            if (selectedAnswer.equals(question.getAns())) {
+                correctAnswers++;
+                correctSound.start();
+
+                Toast.makeText(this, "CORRECT!!", Toast.LENGTH_SHORT).show();
+                textView.setBackground(getResources().getDrawable(R.drawable.option_right));
+
+
+            } else {
+                showAnswer();
+                wrongSound.start();
+
+                textView.setBackground(getResources().getDrawable(R.drawable.option_wrong));
+            }
         }
     }
     void reset(){
@@ -138,7 +158,6 @@ else if(question.getAns().equals(binding.option4.getText().toString()))
         binding.option2.setBackground(getResources().getDrawable(R.drawable.option_unselected));
         binding.option3.setBackground(getResources().getDrawable(R.drawable.option_unselected));
         binding.option4.setBackground(getResources().getDrawable(R.drawable.option_unselected));
-
     }
     public void onClick(View view){
         switch (view.getId()){
@@ -150,14 +169,13 @@ else if(question.getAns().equals(binding.option4.getText().toString()))
                     timer.cancel();
                 TextView selected = (TextView) view;
                 checkAnswer(selected);
-
                break;
             case  R.id.nextBtn:
-//                reset();
-                if(index<=questions.size()) {
+             // reset();
+                if(index<questions.size()) {
                     reset();
                     setNextQuestion();
-                    index++;
+
                 }else {
                     Intent intent = new Intent(QuizActivity.this,ResultActivity.class);
                     intent.putExtra("correct",correctAnswers);
@@ -168,4 +186,18 @@ else if(question.getAns().equals(binding.option4.getText().toString()))
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (correctSound != null) {
+            correctSound.release();
+            correctSound = null;
+        }
+        if (wrongSound != null) {
+            wrongSound.release();
+            wrongSound = null;
+        }
+    }
+
 }

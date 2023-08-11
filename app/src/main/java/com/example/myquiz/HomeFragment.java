@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myquiz.databinding.FragmentHomeBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +28,7 @@ public class HomeFragment extends Fragment {
 
     }
  FragmentHomeBinding binding;
+    User user;
     FirebaseFirestore database;    //to get category from firestore
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,25 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         // Inflate the layout for this fragment
         database = FirebaseFirestore.getInstance();
+
+        database.collection("users")
+                .document(FirebaseAuth.getInstance().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        user =documentSnapshot.toObject(User.class);
+                        binding.userName.setText("Hi,\t" + user.getName());
+                    }
+                });
         ArrayList<CategoryModel> categories = new ArrayList<>();
 
         CategoryAdapter adapter = new CategoryAdapter(getContext(),categories);
+
 
         database.collection("categories")
                 //addSnapshotListener-- > automatically update the ui

@@ -4,32 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/card_bg"
     tools:context=".LoginActivity">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_launcher_background"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+      android:background="@drawable/top_background1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/bg_color"
         app:cardCornerRadius="20dp"
+        app:cardElevation="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +54,7 @@
                 android:layout_marginTop="9dp"
                 android:gravity="center"
                 android:text="Login with account"
-                android:textColor="@color/colorPurple"
+                android:textColor="@color/txt_color1"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -55,12 +66,13 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/background" />
 
+
             <EditText
                 android:id="@+id/emailbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/textbox"
+                android:background="@drawable/option_unselected"
                 android:ems="10"
 
                 android:hint="Email Address"
@@ -71,22 +83,24 @@
                 android:id="@+id/passwordBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_margin="10dp"
-                android:background="@drawable/textbox"
+                android:layout_margin="10dp"
+                android:background="@drawable/option_unselected"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="15dp" />
 
+
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/coinsP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="right"
-                android:text="forget the password"
+                android:text="forget password"
+                android:textColor="@color/BLUE"
                 android:textSize="14sp" />
 
             <Button
@@ -115,4 +129,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
