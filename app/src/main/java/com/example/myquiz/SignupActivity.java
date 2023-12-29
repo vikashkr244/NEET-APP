@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.ActionMode;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -39,6 +44,32 @@ public class SignupActivity extends AppCompatActivity {
 
         dialog = new ProgressDialog(this);
         dialog.setMessage("We are creating your account...");
+
+        SpannableStringBuilder spannable = new SpannableStringBuilder(
+                "By signing up you agree to our ");
+
+        int privacyPolicyStart = spannable.length();
+        spannable.append("privacy policy ");
+        spannable.setSpan(new ForegroundColorSpan(Color.BLUE), privacyPolicyStart,
+                spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        int termsStart = spannable.length();
+        spannable.append("and terms and conditions.");
+        spannable.setSpan(new ForegroundColorSpan(Color.BLUE), termsStart,
+                spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        binding.tvPrivacy.setText(spannable);
+
+        binding.tvPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String privacyPolicyUrl = "https://sites.google.com/view/myquiz-privacy-policy";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(privacyPolicyUrl));
+                startActivity(intent);
+            }
+        });
 
         binding.createNewbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -143,10 +143,20 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/submit_btn"
 
                         android:text="Already Have an Account" />
+                    <TextView
+                        android:id="@+id/tv_privacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="By signing up you agree to our privacy policy and terms and conditions."
+                        android:textSize="10sp"/>
 
 
                 </LinearLayout>
