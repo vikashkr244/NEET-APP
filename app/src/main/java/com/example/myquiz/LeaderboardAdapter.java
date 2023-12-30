@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.myquiz.databinding.RowLeaderboardsBinding;
 
 import java.util.ArrayList;
@@ -35,9 +33,7 @@ holder.binding.name.setText(user.getName());
 holder.binding.coins.setText(String.valueOf(user.getCoins()));
 holder.binding.index.setText(String.format("#%d",position+1));
 
-//        Glide.with(context)
-//                .load(user.getProfile())
-//                .into(holder.binding.imageView7);
+
     }
 
     @Override
