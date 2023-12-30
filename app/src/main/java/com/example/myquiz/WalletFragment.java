@@ -65,7 +65,7 @@ public class WalletFragment extends Fragment {
                    .set(request).addOnSuccessListener(new OnSuccessListener<Void>() {
                        @Override
                        public void onSuccess(Void unused) {
-                           Toast.makeText(getContext(), "Request sent succesfully", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getContext(), "Request sent successfully", Toast.LENGTH_SHORT).show();
                        }
                    });
                 }else{
